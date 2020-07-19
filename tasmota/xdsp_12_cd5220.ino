@@ -23,27 +23,48 @@
 
 #define XDSP_12 12
 
-#include <renderer.h>
 #include <TasmotaSerial.h>
 
 TasmotaSerial *serial;
+
+enum CD5220Command{
+  OverwriteMode = 0x1B11;
+  VerticalScrollMode = 0x1B12;
+  HorizontalScrollMode = 0x1B13;
+
+  SetCursor = 0x1B6C;
+  Clear = 0x0C;
+}
 /*********************************************************************************************/
 
-uint16_t CD5220CursorCommand(uint16_t x, uint16_t y){
-  uint16_t baseCommand = 0x1B6C << 16;
-  baseCommand |= x << 8;
-  baseCommand |= y;
-  return baseCommand;
+void CD5220SendCommand(CD5220Command command){
+  serial->write(command);
+}
+
+void CD5220SendCommand(CD5220Command command, uint8_t numArgs, ...){
+  va_list args;
+  if (args == 0){
+    serial->write(command);
+    return;
+  }
+  va_start(args, numArgs);
+  uint32_t result = command << (numArgs*8);
+  for (int i = 0; i < numArgs; i++){
+    result |= va_arg(args,uint8_t) << ((numArgs-i-1) * 8);
+  }
+  va_end(args);
+  serial->write(result);
 }
 
 void CD5220DisplayClear(void)
 {
-  serial->write(0x0C);
+  CD5220SendCommand(Clear);
 }
 
-void CD5220DrawString(void)
+void CD5220DisplayDrawStringAt(void)
 {
-  serial->write(CD5220CursorCommand(dsp_x,dsp_y));
+  //FIXME
+  CD5220SendCommand(SetCursor,2,dsp_x,dsp_y);
   serial->print(dsp_str);
 }
 
@@ -73,6 +94,44 @@ void CD5220InitDriver(void)
   }
 }
 
+#ifdef USE_DISPLAY_MODES1TO5
+void CD5220PrintLog(void)
+{
+  disp_refresh--;
+  if (!disp_refresh)
+  {
+    disp_refresh = Settings.display_refresh;
+    // Grab log
+    char *txt = DisplayLogBuffer('\370');
+    if (txt != NULL)
+    {
+      serial->println(txt);
+    }
+  }
+}
+
+// Ticker for every second
+void CD5220Refresh(void)
+{
+  if (Settings.display_mode)
+  {
+    switch (Settings.display_mode)
+    {
+    case 1:
+      //CD5220Time();
+      break;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+      CD5220PrintLog();
+      break;
+    }
+  }
+}
+
+#endif
+
 /*********************************************************************************************\
  * Interface
 \*********************************************************************************************/
@@ -96,8 +155,13 @@ bool Xdsp12(byte function)
       CD5220DisplayClear();
       break;
     case FUNC_DISPLAY_DRAW_STRING:
-      CD5220DrawString();
+      CD5220DisplayDrawStringAt();
       break;
+#ifdef USE_DISPLAY_MODES1TO5
+    case FUNC_DISPLAY_EVERY_SECOND:
+      CD5220Refresh();
+      break;
+#endif
     }
   }
   return result;
