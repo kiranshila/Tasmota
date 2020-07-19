@@ -286,6 +286,8 @@
 //    #define USE_DISPLAY_SSD1351                  // [DisplayModel 9]
 //    #define USE_DISPLAY_RA8876                   // [DisplayModel 10]
 
+#define USE_DISPLAY_CD5220                      // [DisplayModel 12] Enable CD5220 40 Character VFD over dedicated Serial TX pin
+
 #undef DEBUG_THEO                                // Disable debug code
 #undef USE_DEBUG_DRIVER                          // Disable debug code
 #endif  // FIRMWARE_DISPLAYS
