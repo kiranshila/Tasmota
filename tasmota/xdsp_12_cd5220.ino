@@ -47,11 +47,6 @@ void CD5220DrawString(void)
   serial->print(dsp_str);
 }
 
-void CD5220SetBrightness(uint8_t)
-{
-  
-}
-
 void CD5220InitDriver(void)
 {
   if (!Settings.display_model)
@@ -66,9 +61,7 @@ void CD5220InitDriver(void)
     Settings.display_height = 2;
 
     // init serial
-    Serial.println("Initing VFD Serial");
     serial = new TasmotaSerial(-1, PinUsed(GPIO_CD5220_TX) ? Pin(GPIO_CD5220_TX) : -1, 1);
-    Serial.println("Created new Serial");
     serial->begin();
     // initialize display
     serial->write(0x1B40);
