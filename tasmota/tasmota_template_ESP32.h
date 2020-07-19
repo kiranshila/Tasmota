@@ -556,7 +556,7 @@ const uint16_t kGpioNiceList[] PROGMEM = {
   AGPIO(GPIO_TELEINFO_RX),
   AGPIO(GPIO_TELEINFO_ENABLE),
 #endif
-#ifdef USE_CD5220
+#ifdef USE_DISPLAY_CD5220
   AGPIO(GPIO_CD5220_TX),     // CD5220 pin for TX
 #endif
 /*

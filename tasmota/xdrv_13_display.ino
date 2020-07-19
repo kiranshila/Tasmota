@@ -2039,7 +2039,7 @@ bool Xdrv13(uint8_t function)
 {
   bool result = false;
 
-  if ((i2c_flg || spi_flg || soft_spi_flg) && XdspPresent()) {
+  if (XdspPresent()) {
     switch (function) {
       case FUNC_PRE_INIT:
         DisplayInitDriver();
