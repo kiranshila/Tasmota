@@ -1,7 +1,7 @@
 /*
   it-IT.h - localization for Italian - Italy for Tasmota
 
-  Copyright (C) 2020 Gennaro Tortone - some mods by Antonio Fragola
+  Copyright (C) 2020 Gennaro Tortone - some mods by Antonio Fragola - rev. 24.07.2020
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -403,23 +403,23 @@
 #define D_DOMOTICZ_KEY_IDX "Idx - chiave"
 #define D_DOMOTICZ_SWITCH_IDX "Idx - switch"
 #define D_DOMOTICZ_SENSOR_IDX "Idx - sensore"
-  #define D_DOMOTICZ_TEMP "Temp"
-  #define D_DOMOTICZ_TEMP_HUM "Temp,Umd"
-  #define D_DOMOTICZ_TEMP_HUM_BARO "Temp,Umd,Baro"
-  #define D_DOMOTICZ_POWER_ENERGY "Alim,Energia"
-  #define D_DOMOTICZ_ILLUMINANCE "Illuminazione"
-  #define D_DOMOTICZ_COUNT "Cont/PM1"
-  #define D_DOMOTICZ_VOLTAGE "Tensione/PM2.5"
-  #define D_DOMOTICZ_CURRENT "Corrente/PM10"
-  #define D_DOMOTICZ_AIRQUALITY "Qualità aria"
-  #define D_DOMOTICZ_P1_SMART_METER "P1SmartMeter"
+#define D_DOMOTICZ_TEMP "Temp"
+#define D_DOMOTICZ_TEMP_HUM "Temp,Umd"
+#define D_DOMOTICZ_TEMP_HUM_BARO "Temp,Umd,Baro"
+#define D_DOMOTICZ_POWER_ENERGY "Alim,Energia"
+#define D_DOMOTICZ_ILLUMINANCE "Illuminazione"
+#define D_DOMOTICZ_COUNT "Cont/PM1"
+#define D_DOMOTICZ_VOLTAGE "Tensione/PM2.5"
+#define D_DOMOTICZ_CURRENT "Corrente/PM10"
+#define D_DOMOTICZ_AIRQUALITY "Qualità aria"
+#define D_DOMOTICZ_P1_SMART_METER "P1SmartMeter"
 #define D_DOMOTICZ_UPDATE_TIMER "Intervallo aggiornamento"
 
 // xdrv_09_timers.ino
 #define D_CONFIGURE_TIMER "Timer"
 #define D_TIMER_PARAMETERS "Parametri timer"
 #define D_TIMER_ENABLE "Abilita timer"
-#define D_TIMER_ARM "Attiva"
+#define D_TIMER_ARM "Abilita"
 #define D_TIMER_TIME "Ora"
 #define D_TIMER_DAYS "Giorni"
 #define D_TIMER_REPEAT "Ripeti"
@@ -626,7 +626,7 @@
 #define D_SENSOR_HJL_CF        "BL0937 - CF"
 #define D_SENSOR_MCP39F5_TX    "MCP39F5 - TX"
 #define D_SENSOR_MCP39F5_RX    "MCP39F5 - RX"
-#define D_SENSOR_MCP39F5_RST   "MCP39F5 Rst"
+#define D_SENSOR_MCP39F5_RST   "MCP39F5 - Reset"
 #define D_SENSOR_CSE7766_TX    "CSE7766 - TX"
 #define D_SENSOR_CSE7766_RX    "CSE7766 - RX"
 #define D_SENSOR_PN532_TX      "PN532 - TX"
@@ -645,9 +645,10 @@
 #define D_SENSOR_HRE_DATA      "HRE - Dati"
 #define D_SENSOR_ADE7953_IRQ   "ADE7953 - IRQ"
 #define D_SENSOR_BUZZER        "Cicalino"
-#define D_SENSOR_OLED_RESET    "Ripristino OLED"
+#define D_SENSOR_OLED_RESET    "OLED - Reset"
 #define D_SENSOR_ZIGBEE_TXD    "Zigbee - TX"
 #define D_SENSOR_ZIGBEE_RXD    "Zigbee - RX"
+#define D_SENSOR_ZIGBEE_RST    "Zigbee - Reset"
 #define D_SENSOR_SOLAXX1_TX    "SolaxX1 - TX"
 #define D_SENSOR_SOLAXX1_RX    "SolaxX1- RX"
 #define D_SENSOR_IBEACON_TX    "iBeacon - TX"
@@ -801,7 +802,7 @@
 #define D_AS3935_DISTANCE "distanza:"
 #define D_AS3935_DISTURBER "disturbatore:"
 #define D_AS3935_VRMS "µVrms:"
-#define D_AS3935_APRX "apross.:"
+#define D_AS3935_APRX "appross.:"
 #define D_AS3935_AWAY "lontano"
 #define D_AS3935_LIGHT "illuminazione"
 #define D_AS3935_OUT "illuminazione fuori intervallo"

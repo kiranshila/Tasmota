@@ -1,15 +1,31 @@
 ## Unreleased (development)
 
+### 8.4.0.1 20200730
+
+### 8.4.0 20200730
+
+- Release George
+
 ### 8.3.1.7 20200716
 
 - Remove Arduino ESP8266 Core support for versions before 2.7.1
 - Change to limited support of Arduino IDE as an increasing amount of features cannot be compiled with Arduino IDE
+- Change all timer references from ``Arm`` to ``Enable`` in GUI, ``Timer`` command and JSON message
+- Change Domoticz commands prefix from ``Domoticz`` to ``Dz``
+- Change ``Ping`` now reports the hostname instead of IP address (#8948)
+- Change Zigbee randomizing of parameters at first run or after Reset
+- Add command ``DzSend<type> <index>,<value1(;value2)|state>`` to send values or state to Domoticz
+- Add command ``SetOption100 0/1`` to remove Zigbee ``ZbReceived`` value from ``{"ZbReceived":{xxx:yyy}}`` JSON message
+- Add command ``SetOption101 0/1`` to add the Zigbee source endpoint as suffix to attributes, ex `Power3` instead of `Power` if sent from endpoint 3
+- Add command (``S``)``SerialSend6`` \<comma seperated values\> (#8937)
+- Add support for Sonoff Zigbee Bridge as module 75 (#8583)
 
 ### 8.3.1.6 20200617
 
 - Add command ``Module2`` to configure fallback module on fast reboot (#8464)
 - Add command ``SetOption97 0/1`` to switch between Tuya serial speeds 9600 bps (0) or 115200 bps (1)
 - Add command ``SetOption98 0/1`` to provide rotary rule triggers (1) instead of controlling light (0)
+- Add command ``SetOption99 0/1`` to enable zero cross detection on PWM dimmer
 - Add support for Energy sensor (Denky) for French Smart Metering meter provided by global Energy Providers, need a adaptater. See dedicated full [blog](http://hallard.me/category/tinfo/) about French teleinformation stuff
 - Add library to be used for decoding Teleinfo (French Metering Smart Meter)
 - Add support for single wire LMT01 temperature Sensor by justifiably (#8713)
@@ -68,8 +84,6 @@
 - Add support for VEML6075 UVA/UVB/UVINDEX Sensor by device111 (#8432)
 - Add support for VEML7700 Ambient light intensity Sensor by device111 (#8432)
 
-## Released
-
 ### 8.3.1 20200518
 
 - Release Fred
@@ -85,8 +99,6 @@
 - Change Mutichannel Gas sensor pow function to approximative pow saving 5k of code space
 - Change Quick Power Cycle detection from 4 to 7 power interrupts (#4066)
 - Fix default state of ``SetOption73 0`` for button decoupling and send multi-press and hold MQTT messages
-
-## Released
 
 ### 8.3.0 20200514
 
@@ -171,8 +183,6 @@
 - Add Zigbee command ``ZbUnbind``
 - Add support for unreachable (unplugged) Zigbee devices in Philips Hue emulation and Alexa
 - Add support for 64x48 SSD1306 OLED (#6740)
-
-## Released
 
 ### 8.2.0 20200321
 
