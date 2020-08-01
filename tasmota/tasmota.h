@@ -355,4 +355,13 @@ enum TuyaSupportedFunctions { TUYA_MCU_FUNC_NONE, TUYA_MCU_FUNC_SWT1 = 1, TUYA_M
                               TUYA_MCU_FUNC_REL6_INV, TUYA_MCU_FUNC_REL7_INV, TUYA_MCU_FUNC_REL8_INV, TUYA_MCU_FUNC_LOWPOWER_MODE = 51, TUYA_MCU_FUNC_LAST = 255
 };
 
+enum class CD5220Command{
+  OverwriteMode = 0x1B11,
+  VerticalScrollMode = 0x1B12,
+  HorizontalScrollMode = 0x1B13,
+  Initialize = 0x1B40,
+  SetCursor = 0x1B6C,
+  Clear = 0x0C
+};
+
 #endif  // _TASMOTA_H_

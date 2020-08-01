@@ -26,42 +26,35 @@
 
 TasmotaSerial *serial;
 
-enum CD5220Command{
-  OverwriteMode = 0x1B11,
-  VerticalScrollMode = 0x1B12,
-  HorizontalScrollMode = 0x1B13,
-  Initialize = 0x1B40,
-  SetCursor = 0x1B6C,
-  Clear = 0x0C
-};
-/*********************************************************************************************/
-
-void CD5220SendCommand(CD5220Command command){
-  serial->write(command);
+void CD5220SendBareCommand(CD5220Command command){
+  serial->write((int)command);
+  return;
 }
 
-void CD5220SendCommand(CD5220Command command, uint8_t numArgs, ...){
+void CD5220SendCommand(CD5220Command command, int numArgs, ...){
   va_list args;
   va_start(args, numArgs);
-  uint32_t result = command << (numArgs*8);
+  uint32_t result = (int)command << (numArgs*8);
   for (int i = 0; i < numArgs; i++){
     // Quirk in variadic arguments due to promotion rules
     result |= va_arg(args,int) << ((numArgs-i-1) * 8);
   }
   va_end(args);
   serial->write(result);
+  return;
 }
 
 void CD5220DisplayClear(void)
 {
-  CD5220SendCommand(Clear);
+  CD5220SendBareCommand(CD5220Command::Clear);
+  return;
 }
 
 void CD5220DisplayDrawStringAt(void)
 {
   //FIXME
-  CD5220SendCommand(SetCursor,2,dsp_x,dsp_y);
   serial->print(dsp_str);
+  return;
 }
 
 void CD5220InitDriver(void)
@@ -80,12 +73,13 @@ void CD5220InitDriver(void)
     // init serial
     serial = new TasmotaSerial(-1, PinUsed(GPIO_CD5220_TX) ? Pin(GPIO_CD5220_TX) : -1, 1);
     serial->begin();
-    CD5220SendCommand(Initialize);
-    CD5220SendCommand(Clear);
+    CD5220SendBareCommand(CD5220Command::Initialize);
+    CD5220DisplayClear();
 #ifdef SHOW_SPLASH
     serial->println("CD5220 on Tasmota!");
 #endif
   }
+  return;
 }
 
 #ifdef USE_DISPLAY_MODES1TO5
@@ -102,6 +96,7 @@ void CD5220PrintLog(void)
       serial->println(txt);
     }
   }
+  return;
 }
 
 // Ticker for every second
@@ -122,6 +117,7 @@ void CD5220Refresh(void)
       break;
     }
   }
+  return;
 }
 
 #endif
